@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Timetable</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid black; }
+        th { background-color: #007BFF; color: white; }
+        form { margin-top: 20px; }
+        input, button { padding: 10px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Lagos State University Timetable</h2>
+    <table id="timetable">
+        <tr>
+            <th>Day</th>
+            <th>Course</th>
+            <th>Time</th>
+            <th>Venue</th>
+        </tr>
+    </table>
+
+    <!-- Form for adding courses -->
+    <h3>Add a New Course</h3>
+    <form id="courseForm">
+        <input type="text" id="day" placeholder="Day" required />
+        <input type="text" id="course" placeholder="Course" required />
+        <input type="text" id="time" placeholder="Time" required />
+        <input type="text" id="venue" placeholder="Venue" required />
+        <button type="submit">Add Course</button>
+    </form>
+
+    <script>
+        // Load timetable from local storage or set as default if none exists
+        const timetableData = JSON.parse(localStorage.getItem('timetableData')) || [
+            { day: "Monday", course: "CSC 401", time: "8:00 AM - 10:00 AM", venue: "Hall A" },
+            { day: "Tuesday", course: "CSC 403", time: "10:00 AM - 12:00 PM", venue: "Hall B" },
+            { day: "Wednesday", course: "CSC 405", time: "12:00 PM - 2:00 PM", venue: "Hall C" }
+        ];
+
+        // Function to display the timetable
+        function displayTimetable() {
+            const table = document.getElementById("timetable");
+            table.innerHTML = `
+                <tr>
+                    <th>Day</th>
+                    <th>Course</th>
+                    <th>Time</th>
+                    <th>Venue</th>
+                </tr>
+            `;
+            timetableData.forEach(item => {
+                let row = `<tr>
+                    <td>${item.day}</td>
+                    <td>${item.course}</td>
+                    <td>${item.time}</td>
+                    <td>${item.venue}</td>
+                </tr>`;
+                table.innerHTML += row;
+            });
+        }
+
+        // Handle form submission
+        document.getElementById('courseForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form data
+            const day = document.getElementById('day').value;
+            const course = document.getElementById('course').value;
+            const time = document.getElementById('time').value;
+            const venue = document.getElementById('venue').value;
+
+            // Add new course to timetableData
+            timetableData.push({ day, course, time, venue });
+
+            // Save updated timetable to local storage
+            localStorage.setItem('timetableData', JSON.stringify(timetableData));
+
+            // Clear form inputs
+            document.getElementById('courseForm').reset();
+
+            // Re-display updated timetable
+            displayTimetable();
+        });
+
+        // Initial display of timetable
+        displayTimetable();
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Timetable</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid black; }
+        th { background-color: #007BFF; color: white; }
+    </style>
+</head>
+<body>
+    <h2>Lagos State University Timetable</h2>
+    <table id="timetable">
+        <tr>
+            <th>Day</th>
+            <th>Course</th>
+            <th>Time</th>
+            <th>Venue</th>
+        </tr>
+    </table>
+    <script>
+        // Sample timetable data
+        const timetableData = [
+            { day: "Monday", course: "CSC 401", time: "8:00 AM - 10:00 AM", venue: "Hall A" },
+            { day: "Tuesday", course: "CSC 403", time: "10:00 AM - 12:00 PM", venue: "Hall B" },
+            { day: "Wednesday", course: "CSC 405", time: "12:00 PM - 2:00 PM", venue: "Hall C" }
+        ];
+
+        // Add data to the table
+        const table = document.getElementById("timetable");
+        timetableData.forEach(item => {
+            let row = `<tr>
+                <td>${item.day}</td>
+                <td>${item.course}</td>
+                <td>${item.time}</td>
+                <td>${item.venue}</td>
+            </tr>`;
+            table.innerHTML += row;
+        });
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Timetable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e9e9e9;
+        }
+        button {
+            padding: 8px 12px;
+            margin: 5px;
+            background-color: #FF4D4D;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #e60000;
+        }
+        form {
+            text-align: center;
+            margin: 20px 0;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .export-btn {
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .export-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Lagos State University Timetable</h2>
+
+        <table id="timetable">
+            <tr>
+                <th>Day</th>
+                <th>Course</th>
+                <th>Time</th>
+                <th>Venue</th>
+                <th>Action</th>
+            </tr>
+        </table>
+
+        <!-- Form for adding courses -->
+        <h3>Add a New Course</h3>
+        <form id="courseForm">
+            <input type="text" id="day" placeholder="Day" required />
+            <input type="text" id="course" placeholder="Course" required />
+            <input type="text" id="time" placeholder="Time" required />
+            <input type="text" id="venue" placeholder="Venue" required />
+            <button type="submit">Add Course</button>
+        </form>
+
+        <button class="export-btn" id="exportButton">Export Timetable as PDF</button>
+    </div>
+
+    <script>
+        // Load timetable from local storage or set as default if none exists
+        const timetableData = JSON.parse(localStorage.getItem('timetableData')) || [
+            { day: "Monday", course: "CSC 401", time: "8:00 AM - 10:00 AM", venue: "Hall A" },
+            { day: "Tuesday", course: "CSC 403", time: "10:00 AM - 12:00 PM", venue: "Hall B" },
+            { day: "Wednesday", course: "CSC 405", time: "12:00 PM - 2:00 PM", venue: "Hall C" }
+        ];
+
+        // Function to display the timetable
+        function displayTimetable() {
+            const table = document.getElementById("timetable");
+            table.innerHTML = `
+                <tr>
+                    <th>Day</th>
+                    <th>Course</th>
+                    <th>Time</th>
+                    <th>Venue</th>
+                    <th>Action</th>
+                </tr>
+            `;
+            timetableData.forEach((item, index) => {
+                let row = `<tr>
+                    <td>${item.day}</td>
+                    <td>${item.course}</td>
+                    <td>${item.time}</td>
+                    <td>${item.venue}</td>
+                    <td><button onclick="deleteCourse(${index})">Delete</button></td>
+                </tr>`;
+                table.innerHTML += row;
+            });
+        }
+
+        // Handle form submission
+        document.getElementById('courseForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get form data
+            const day = document.getElementById('day').value;
+            const course = document.getElementById('course').value;
+            const time = document.getElementById('time').value;
+            const venue = document.getElementById('venue').value;
+
+            // Add new course to timetableData
+            timetableData.push({ day, course, time, venue });
+
+            // Save updated timetable to local storage
+            localStorage.setItem('timetableData', JSON.stringify(timetableData));
+
+            // Clear form inputs
+            document.getElementById('courseForm').reset();
+
+            // Re-display updated timetable
+            displayTimetable();
+        });
+
+        // Function to delete course
+        function deleteCourse(index) {
+            timetableData.splice(index, 1);
+            localStorage.setItem('timetableData', JSON.stringify(timetableData));
+            displayTimetable();
+        }
+
+        // Function to export timetable as PDF
+        document.getElementById('exportButton').addEventListener('click', function() {
+            const doc = new jsPDF();
+            doc.text("University Timetable", 14, 10);
+            timetableData.forEach((item, index) => {
+                doc.text(`${item.day}: ${item.course} (${item.time}) - ${item.venue}`, 14, 20 + (index * 10));
+            });
+            doc.save("timetable.pdf");
+        });
+
+        // Initial display of timetable
+        displayTimetable();
+    </script>
+
+    <!-- Add jsPDF library for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</body>
+</html>
+
+
+<script>
+    // Function to display the timetable
+    function displayTimetable() {
+        const table = document.getElementById("timetable");
+        table.innerHTML = `
+            <tr>
+                <th>Day</th>
+                <th>Course</th>
+                <th>Time</th>
+                <th>Venue</th>
+                <th>Action</th>
+            </tr>
+        `;
+        timetableData.forEach((item, index) => {
+            let row = `<tr>
+                <td>${item.day}</td>
+                <td>${item.course}</td>
+                <td>${item.time}</td>
+                <td>${item.venue}</td>
+                <td><button class="delete-btn" onclick="deleteCourse(${index})">Delete</button></td>
+            </tr>`;
+            table.innerHTML += row;
+        });
+    }
+
+    // Function to delete a course from the timetable
+    function deleteCourse(index) {
+        timetableData.splice(index, 1); // Remove course from array
+        localStorage.setItem('timetableData', JSON.stringify(timetableData)); // Save updated data to local storage
+        displayTimetable(); // Refresh the timetable
+    }
+</script>
